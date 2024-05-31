@@ -39,4 +39,5 @@ class super_string {
             printInOrder(root);
             cout << endl;
         }
+        void limpiarPostOrder(nodo* nodo);
 };

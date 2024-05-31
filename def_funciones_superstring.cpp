@@ -1,4 +1,3 @@
-#include <functional>
 #include "tda_superstring.cpp"
 
 void super_string::juntar(super_string &s){}
@@ -31,30 +30,7 @@ void super_string::separar(int i, super_string &s, super_string &b){}
 
 void super_string::reverso(){}
 
-int super_string::recortar(){
-    /*
-    int index_nueva_raiz = length/2;
-
-    if (length == 2){
-        cout << root->c;
-        return 1;
-    } else if (length == 3){
-        root->right->left = root;
-        nodo* aux = root->right;
-        root->right = nullptr;
-        root = aux;
-        cout << root->c;
-        return 1;
-
-    } else if (length%2 == 0 && length != 2){
-        
-    } else if (length%2 != 0 && length != 3){
-
-    }
-
-    return 0;
-    */
-}
+int super_string::recortar(){}
 
 string super_string::stringizar(){
     string str = "";
@@ -62,7 +38,9 @@ string super_string::stringizar(){
     return str;
 }
 
-void super_string::limpiar(){}
+void super_string::limpiar(){
+    limpiarPostOrder(root);
+}
 
 void super_string::stringizar_in_order(nodo* nodo, string& str){
     if (nodo == nullptr){
@@ -71,4 +49,14 @@ void super_string::stringizar_in_order(nodo* nodo, string& str){
     stringizar_in_order(nodo->left, str);
     str += nodo->c;
     stringizar_in_order(nodo->right, str);
+}
+
+void super_string::limpiarPostOrder(nodo* nodo){
+    if (nodo == nullptr){
+        return;
+    }
+
+    limpiarPostOrder(nodo->left);
+    limpiarPostOrder(nodo->right);
+    delete nodo;
 }
