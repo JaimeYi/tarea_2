@@ -18,6 +18,12 @@ class super_string {
         int height = 0; // Altura del árbol
         int length = 0; // Largo del super-string
         nodo* root = nullptr; // Raíz del super-string
+        void printInOrder(nodo* node) {
+            if (node == nullptr) return;
+            printInOrder(node->left);
+            cout << node->c << " ";
+            printInOrder(node->right);
+        }
     public:
         super_string() {}
         void juntar(super_string &s);
@@ -28,4 +34,9 @@ class super_string {
         int recortar(); // Retorna this->height después de recortar
         string stringizar(); // Debe ser O(n)
         void limpiar(); // Se deben borrar todos los nodos del super-string
+        void stringizar_in_order(nodo* nodo, string& str);
+        void printInOrder() {
+            printInOrder(root);
+            cout << endl;
+        }
 };
