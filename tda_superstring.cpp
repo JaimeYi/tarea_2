@@ -9,10 +9,7 @@ class super_string {
             nodo *left = nullptr, *right = nullptr;
             int index;
             char c;
-            nodo(int index, char c){
-                this->index = index;
-                this->c = c;
-            }
+            nodo(int index, char c):index(index), c(c){}
             nodo(){}
         };
         int height = 0; // Altura del árbol
@@ -40,4 +37,10 @@ class super_string {
             cout << endl;
         }
         void limpiarPostOrder(nodo* nodo);
+        void appendArrayInOrder(nodo* node, nodo** arr, int& i);
+        nodo* balancearABBbasedInArray(nodo** arr, int start, int end);
+        void joinTrees(nodo* nodo);
+        void reverseNodes(nodo* nodo);
 };
+
+/************************************************************************************/
