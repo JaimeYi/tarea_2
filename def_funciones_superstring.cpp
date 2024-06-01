@@ -5,6 +5,7 @@ void super_string::juntar(super_string &s){
     if (s.root == nullptr){
         return;
     }
+    s.aumentarIndices(s.root, length);
     joinTrees(s.root);
 }
 
@@ -14,29 +15,24 @@ void super_string::agregar(char c){
     } else {
         nodo* nodo_actual = root;
         while (true){
-            if (length < nodo_actual->index){
-                if (nodo_actual->left == nullptr){
-                    nodo_actual->left = new nodo(length, c);
-                    break;
-                }
-                nodo_actual = nodo_actual->left;
-            } else {
-                if (nodo_actual->right == nullptr){
-                    nodo_actual->right = new nodo(length, c);
-                    break;
-                }
-                nodo_actual = nodo_actual->right;
+            if (nodo_actual->right == nullptr){
+                nodo_actual->right = new nodo(length, c);
+                break;
             }
+            nodo_actual = nodo_actual->right;
         }
     }
     length++;
 }
 
 void super_string::separar(int i, super_string &a, super_string &b){
-    if (i <= 0 || i >= length-1){
+    if (i <= 0){
+        a.root = nullptr;
+        b.root = root;
+        return;
+    } else if (i >= length){
         a.root = root;
         b.root = nullptr;
-        return;
     }
 
     nodo** arr = new nodo*[length];
@@ -63,7 +59,7 @@ int super_string::recortar(){
     int end = length-1;
     int i = 0;
     appendArrayInOrder(root, arr, i);
-    balancearABBbasedInArray(arr, start, end);
+    root = balancearABBbasedInArray(arr, start, end);
     height = log2 (length);
 
     return height;
@@ -120,6 +116,7 @@ super_string::nodo* super_string::balancearABBbasedInArray(nodo** arr, int start
     nodo* nodo = arr[mid];
     nodo->left = balancearABBbasedInArray(arr, start, mid-1);
     nodo->right = balancearABBbasedInArray(arr, mid+1, end);
+
     return nodo;
 }
 
@@ -127,8 +124,8 @@ void super_string::joinTrees(nodo* nodo){
     if (nodo == nullptr){
         return;
     }
-    this->agregar(nodo->c);
     joinTrees(nodo->left);
+    this->agregar(nodo->c);
     joinTrees(nodo->right);
 }
 
@@ -140,3 +137,13 @@ void super_string::reverseNodes(nodo* nodo){
     reverseNodes(nodo->left);
     reverseNodes(nodo->right);
 }
+
+void super_string::aumentarIndices(nodo* nodo, int largo){
+    if (nodo == nullptr){
+        return;
+    }
+    aumentarIndices(nodo->left, largo);
+    nodo->index += largo;
+    aumentarIndices(nodo->right, largo);
+}
+/* cd /mnt/c/Users/Under/Codes/C++/Tareas */

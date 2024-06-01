@@ -41,6 +41,5 @@ class super_string {
         nodo* balancearABBbasedInArray(nodo** arr, int start, int end);
         void joinTrees(nodo* nodo);
         void reverseNodes(nodo* nodo);
+        void aumentarIndices(nodo* nodo, int largo);
 };
-
-/************************************************************************************/
