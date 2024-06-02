@@ -66,21 +66,35 @@ void recorte(super_string& s){
 }
 
 int main (){
-    super_string xd, m, ya, pr, s;
-    string hola, prueba , ja;
+    fstream file;
+    super_string s;
+    string str, line;
+    int i, j;
+    file.open("prueba.txt");
 
-    insertar(0, "El_Carlos", xd);
-    mostrar(xd);
-    insertar(9, "_es_malo", xd);
-    mostrar(xd);
-    eliminar(xd, 13, 16);
-    mostrar(xd);
-    insertar(13, "bueno", xd);
-    mostrar(xd);
-    recorte(xd);
-    reverse(xd, 0, 17);
-    mostrar(xd);
-    recorte(xd);
+    while(true){
+        file >> line;
+
+        if (line == "INSERTAR"){
+            file >> i;
+            file >> str;
+            insertar(i, str, s);
+        } else if (line == "MOSTRAR"){
+            mostrar(s);
+        }else if (line == "FIN"){
+            break;
+        } else if (line == "ELIMINAR"){
+            file >> i;
+            file >> j;
+            eliminar(s, i, j);
+        } else if (line == "RECORTAR"){
+            recorte(s);
+        } else if (line == "REVERSO"){
+            file >> i;
+            file >> j;
+            reverse(s, i, j);
+        }
+    }
 
     return 0;
 }

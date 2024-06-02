@@ -57,10 +57,12 @@ int super_string::recortar(){
     nodo** arr = new nodo*[length];
     int start = 0;
     int end = length-1;
-    int i = 0;
+    int i = 0, h1 = 0, h2 = 0;
     appendArrayInOrder(root, arr, i);
     root = balancearABBbasedInArray(arr, start, end);
-    height = log2 (length);
+    calcularAlturaLeft(root, h1);
+    calcularAlturaRight(root, h2);
+    h1>h2?height=h1:height=h2;
 
     return height;
 }
@@ -145,5 +147,23 @@ void super_string::aumentarIndices(nodo* nodo, int largo){
     aumentarIndices(nodo->left, largo);
     nodo->index += largo;
     aumentarIndices(nodo->right, largo);
+}
+
+void super_string::calcularAlturaLeft(nodo* nodo, int& v){
+    if (nodo == nullptr){
+        return;
+    }
+
+    v+=1;
+    calcularAlturaLeft(nodo->left, v);
+}
+
+void super_string::calcularAlturaRight(nodo* nodo, int& v){
+    if (nodo == nullptr){
+        return;
+    }
+
+    v+=1;
+    calcularAlturaRight(nodo->right, v);
 }
 /* cd /mnt/c/Users/Under/Codes/C++/Tareas */

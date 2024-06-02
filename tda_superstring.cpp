@@ -42,4 +42,6 @@ class super_string {
         void joinTrees(nodo* nodo);
         void reverseNodes(nodo* nodo);
         void aumentarIndices(nodo* nodo, int largo);
+        void calcularAlturaLeft(nodo* nodo, int& v);
+        void calcularAlturaRight(nodo* nodo, int& v);
 };
